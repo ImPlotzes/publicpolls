@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>PublicPolls | Create a poll</title>
+        <link rel="icon" href="./assets/img/icon.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap">
+        <link rel="stylesheet" href="./assets/css/base.css">
+        <link rel="stylesheet" href="./assets/css/create.css">
+    </head>
+
+    <body>
+        <a id="back-button" href="./">
+            <svg height="1em" viewBox="0 0 63 52" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#CFBFAD" d="m13 21h45a1 1 0 010 10h-45l15 15a1 1 0 01-5 5l-20-20c-4-4-4-6 0-10l20-20a1 1 0 015 5z"/>
+            </svg>
+            Home
+        </a>
+        <h1>Create a poll</h1>
+        <p>Here you can create your own poll. Every poll has a few limits. These limits are listed below.</p>
+        <ul>
+            <li>The question can be up to 128 characters long.</li>
+            <li>You have to provide at least 2 options, but no more than 15 options.</li>
+            <li>Your options can't be longer than 64 characters.</li>
+            <li>You have to add your name, this can be any name, as long as it's no longer than 32 characters.</li>
+        </ul>
+
+        <div id="form">
+            <div class="input-container">
+                <label for="question">Question</label>
+                <input id="question" type="text" maxlength="128" placeholder="Ex. What is your favourite colour?">
+            </div>
+            <hr>
+            <div class="input-container">
+                <label for="option1">Option 1</label>
+                <input id="option1" type="text" maxlength="64" placeholder="Ex. Red">
+            </div>
+            <div class="input-container">
+                <label for="option2">Option 2</label>
+                <input id="option2" type="text" maxlength="64" placeholder="Ex. Blue">
+            </div>
+            <div id="add-option-button">
+                <svg height="1.1em" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#808BED" d="M35 5V25H55A1 1 0 0155 35H35V55A1 1 0 0125 55V35H5A1 1 0 015 25H25V5A1 1 0 0135 5Z"/>
+                </svg>
+                Add option
+            </div>
+            <hr>
+            <div class="input-container">
+                <label for="name">Name</label>
+                <input id="name" type="text" maxlength="32" placeholder="Ex. John Smith">
+            </div>
+        </div>
+        <button id="create-button">Create poll</button>
+    </body>
+</html>

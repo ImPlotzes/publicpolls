@@ -1,0 +1,11 @@
+compatibility_date = "2022-05-21"
+name = "publicpolls"
+workers_dev = false
+route = "publicpolls.cf/api/*"
+
+main = "src/index.mjs"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "publicpolls-prod"
+preview_bucket_name = "publicpolls-dev"

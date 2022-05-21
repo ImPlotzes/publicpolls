@@ -1,10 +1,42 @@
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1F1F27;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #808BED;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6370e9;
+}
+
+::-moz-selection {
+    color: #1F1F27;
+    background: #CFBFAD;
+}
+
+::selection {
+    color: #1F1F27;
+    background: #CFBFAD;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Oxygen', sans-serif;
-    background-color: #121c35;
-    color: white;
-    user-select: none;
-    width: 60vw;
+    background-color: #1F1F27;
+    color: #CFBFAD;
+    width: 70vw;
     margin: 0 auto;
+    padding: 20px;
 }
 
 a {
@@ -20,7 +52,7 @@ a::after {
     width: calc(100% + 5px);
     bottom: 0;
     left: -2.5px;
-    background-color: rgba(236, 115, 2, 0.6);
+    background-color: rgba(128, 139, 237, 0.6);
     transition: height 0.2s ease-out;
 }
 
@@ -32,7 +64,13 @@ a:visited {
     color: inherit;
 }
 
-@media screen and (max-width: 800px) {
+hr {
+    border: none;
+    border-bottom: 2px solid #19191f;
+    margin: 1em 0;
+}
+
+@media screen and (max-width: 1000px) {
     body {
         width: 100vw;
     }

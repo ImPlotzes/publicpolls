@@ -1,0 +1,87 @@
+#back-button {
+    display: inline-flex;
+    align-items: center;
+}
+
+#back-button svg {
+    margin-right: 0.5em;
+}
+
+#form {
+    margin-top: 50px;
+}
+
+.input-container {
+    font-size: 1.1em;
+}
+
+.input-container label {
+    display: block;
+    margin: 2em 0 0.5em;
+}
+
+.input-container input {
+    outline: none;
+    font-family: inherit;
+    background-color: #19191f;
+    color: inherit;
+    border: 2px solid #121217;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1.05em;
+    border-radius: 3px;
+    transition: border-color 0.2s ease-out;
+}
+
+.input-container input:focus {
+    border-color: rgba(128, 139, 237, 0.4);
+}
+
+#add-option-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto 25px;
+    text-align: center;
+    background-color: #19191f;
+    width: 20%;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 2px solid #121217;
+    color: #808BED;
+    user-select: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease-out;
+}
+
+#add-option-button svg {
+    margin-right: 0.5em;
+}
+
+#add-option-button:hover {
+    border-color: rgba(128, 139, 237, 0.4);
+}
+
+#create-button {
+    background-color: #808BED;
+    color: #1F1F27;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 1.1em;
+    margin: 2em 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+    outline: none;
+}
+
+#create-button:hover {
+    background-color: #6370e9;
+}
+
+@media screen and (max-width: 1000px) {
+    #add-option-button {
+        width: 50%;
+    }
+}
