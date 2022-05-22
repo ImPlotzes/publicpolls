@@ -30,9 +30,9 @@
 .input-container input {
     outline: none;
     font-family: inherit;
-    background-color: #19191f;
+    background-color: var(--background-secondary);
     color: inherit;
-    border: 2px solid #121217;
+    border: 2px solid var(--background-tertiary);
     padding: 10px 20px;
     width: 100%;
     font-size: 1.05em;
@@ -41,7 +41,7 @@
 }
 
 .input-container input:focus {
-    border-color: rgba(128, 139, 237, 0.4);
+    border-color: rgba(var(--main-colour-rgb), 0.4);
 }
 
 #add-option-button {
@@ -50,13 +50,12 @@
     justify-content: center;
     margin: 25px auto;
     text-align: center;
-    background-color: #19191f;
+    background-color: var(--background-secondary);
     width: 20%;
     padding: 10px 20px;
     border-radius: 3px;
-    border: 2px solid #121217;
-    color: #808BED;
-    user-select: none;
+    border: 2px solid var(--background-tertiary);
+    color: var(--main-colour);
     cursor: pointer;
     transition: border-color 0.2s ease-out;
 }
@@ -66,7 +65,7 @@
 }
 
 #add-option-button:hover {
-    border-color: rgba(128, 139, 237, 0.4);
+    border-color: rgba(var(--main-colour-rgb), 0.4);
 }
 
 #submit-container {
@@ -76,8 +75,8 @@
 }
 
 #create-button {
-    background-color: #808BED;
-    color: #1F1F27;
+    background-color: var(--main-colour);
+    color: var(--background-primary);
     border: none;
     padding: 10px 20px;
     border-radius: 3px;
@@ -87,11 +86,10 @@
     cursor: pointer;
     transition: background-color 0.2s ease-out;
     outline: none;
-    user-select: none;
 }
 
 #create-button:hover {
-    background-color: #6370e9;
+    background-color: var(--emphasis-colour);
 }
 
 #create-button:disabled {
@@ -102,7 +100,7 @@
 #error-message {
     border-radius: 3px;
     padding: 10px 20px;
-    border: 1px solid #1F1F27;
+    border: 1px solid var(--background-primary);
     margin: 0;
 }
 

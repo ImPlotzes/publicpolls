@@ -20,12 +20,8 @@
         asker.innerText = `Asked by ${poll.name}`;
         info.appendChild(asker);
 
-        let voteAmount = 0;
-        for(const option of poll.options) {
-            voteAmount += option.votes;
-        }
         const votes = document.createElement("li");
-        votes.innerText = `${voteAmount} vote${voteAmount == 1 ? "" : "s"} so far`;
+        votes.innerText = `${poll.total_votes} vote${poll.total_votes == 1 ? "" : "s"} so far`;
         info.appendChild(votes);
 
         const postedOn = document.createElement("li");

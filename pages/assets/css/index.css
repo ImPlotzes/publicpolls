@@ -5,7 +5,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    user-select: none;
 }
 
 #title svg {
@@ -22,11 +21,10 @@
     justify-content: space-around;
     flex-wrap: wrap;
     padding-top: 20px;
-    user-select: none;
 }
 
 #nav .item {
-    border: 2px solid #6370e9;
+    border: 2px solid var(--main-colour);
     padding: 10px 20px;
     border-radius: 5px;
     margin: 10px;
@@ -34,7 +32,7 @@
 }
 
 #nav .item:hover {
-    border: 2px solid #808BED;
+    border: 2px solid var(--emphasis-colour);
 }
 
 #nav .item::after {
@@ -43,10 +41,10 @@
 
 #nav .item.create {
     border: none;
-    background-color: #808BED;
+    background-color: var(--main-colour);
     display: flex;
     align-items: center;
-    color: #1F1F27;
+    color: var(--background-primary);
     transition: background-color 0.2s ease-out;
 }
 
@@ -55,7 +53,7 @@
 }
 
 #nav .item.create:hover {
-    background-color: #6370e9;
+    background-color: var(--emphasis-colour);
 }
 
 #polls {
@@ -63,12 +61,12 @@
     flex-wrap: wrap;
     margin-top: 2em;
     justify-content: center;
-    border-top: 2px solid #19191f;
+    border-top: 2px solid var(--background-secondary);
     padding-top: 1em;
 }
 
 .poll-card {
-    border: 2px solid #19191f;
+    border: 2px solid var(--background-secondary);
     border-radius: 5px;
     width: calc(33% - 60px);
     padding: 0 20px;
@@ -78,7 +76,7 @@
 }
 
 .poll-card h3 {
-    color:#808BED
+    color:var(--main-colour)
 }
 
 .poll-card li {
@@ -86,7 +84,7 @@
 }
 
 .poll-card:hover {
-    border: 2px solid rgba(128, 139, 237, 0.4);
+    border: 2px solid rgba(var(--main-colour-rgb), 0.4);
 }
 
 @media screen and (max-width: 1000px) {

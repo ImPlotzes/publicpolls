@@ -83,7 +83,7 @@ export default async function handleCreate(request, env) {
 
 
 /**
- * Generates a garuanteed unique ID
+ * Generates a guarantee unique ID
  * @param {*} env Object to access the R2 Bucket object
  * @returns {Promise<string>} The unique ID
  */

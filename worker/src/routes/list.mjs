@@ -61,8 +61,10 @@ export default async function handleList(request, env) {
  */
 async function getPoll(env, poll) {
     const json = await (await env.R2_BUCKET.get(poll.key)).json();
+    json.total_votes = 0;
     for(const option of json.options) {
-        option.votes = option.votes.length;
+        json.total_votes += option.votes.length;
+        option.votes = -1;
     }
     return json;
 }
