@@ -12,8 +12,7 @@ export default async function handleCreate(request, env) {
         }), {
             status: 405,
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             }
         });
     }
@@ -24,8 +23,7 @@ export default async function handleCreate(request, env) {
         }), {
             status: 400,
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             }
         });
     }
@@ -46,8 +44,7 @@ export default async function handleCreate(request, env) {
         }), {
             status: 400,
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             }
         });
     }
@@ -78,8 +75,7 @@ export default async function handleCreate(request, env) {
     // Return the poll
     return new Response(JSON.stringify(poll), {
         headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Content-Type": "application/json"
         },
         status: 201
     });
