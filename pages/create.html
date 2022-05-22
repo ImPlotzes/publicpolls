@@ -5,17 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>PublicPolls | Create a poll</title>
-        <link rel="icon" href="./assets/img/icon.svg">
+        <link rel="icon" href="/assets/img/icon.svg">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap">
-        <link rel="stylesheet" href="./assets/css/base.css">
-        <link rel="stylesheet" href="./assets/css/create.css">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/create.css">
     </head>
 
     <body>
-        <a id="back-button" href="./">
+        <a id="back-button" href="/">
             <svg height="1em" viewBox="0 0 63 52" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#CFBFAD" d="m13 21h45a1 1 0 010 10h-45l15 15a1 1 0 01-5 5l-20-20c-4-4-4-6 0-10l20-20a1 1 0 015 5z"/>
             </svg>
@@ -36,13 +36,15 @@
                 <input id="question" type="text" maxlength="128" placeholder="Ex. What is your favourite colour?">
             </div>
             <hr>
-            <div class="input-container">
-                <label for="option1">Option 1</label>
-                <input id="option1" type="text" maxlength="64" placeholder="Ex. Red">
-            </div>
-            <div class="input-container">
-                <label for="option2">Option 2</label>
-                <input id="option2" type="text" maxlength="64" placeholder="Ex. Blue">
+            <div id="options">
+                <div class="input-container">
+                    <label for="option1">Option 1</label>
+                    <input id="option1" type="text" maxlength="64" placeholder="Ex. Red">
+                </div>
+                <div class="input-container">
+                    <label for="option2">Option 2</label>
+                    <input id="option2" type="text" maxlength="64" placeholder="Ex. Blue">
+                </div>
             </div>
             <div id="add-option-button">
                 <svg height="1.1em" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +58,10 @@
                 <input id="name" type="text" maxlength="32" placeholder="Ex. John Smith">
             </div>
         </div>
-        <button id="create-button">Create poll</button>
+        <div id="submit-container">
+            <button id="create-button">Create poll</button>
+            <p id="error-message"></p>
+        </div>
+        <script src="/assets/js/create.js"></script>
     </body>
 </html>

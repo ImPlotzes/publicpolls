@@ -16,8 +16,15 @@
 }
 
 .input-container label {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 2em 0 0.5em;
+}
+
+.input-container label svg {
+    margin-left: 0.5em;
+    transform: rotate(45deg);
+    cursor: pointer;
 }
 
 .input-container input {
@@ -41,7 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px auto 25px;
+    margin: 25px auto;
     text-align: center;
     background-color: #19191f;
     width: 20%;
@@ -62,6 +69,12 @@
     border-color: rgba(128, 139, 237, 0.4);
 }
 
+#submit-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+}
+
 #create-button {
     background-color: #808BED;
     color: #1F1F27;
@@ -70,14 +83,27 @@
     border-radius: 3px;
     font-family: inherit;
     font-size: 1.1em;
-    margin: 2em 0;
+    margin-right: 2em;
     cursor: pointer;
     transition: background-color 0.2s ease-out;
     outline: none;
+    user-select: none;
 }
 
 #create-button:hover {
     background-color: #6370e9;
+}
+
+#create-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#error-message {
+    border-radius: 3px;
+    padding: 10px 20px;
+    border: 1px solid #1F1F27;
+    margin: 0;
 }
 
 @media screen and (max-width: 1000px) {
