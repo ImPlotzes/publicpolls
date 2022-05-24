@@ -64,11 +64,17 @@ export default async function handleVote(request, env, ctx) {
         });
     }
 
-    // Check if the current IP address already voted for this poll
-    const requestIP = request.headers.get("CF-Connecting-IP");
+    // Create the IP address hash
+    const requestIP = new TextEncoder().encode(request.headers.get("CF-Connecting-IP"));
+    const digest = await crypto.subtle.digest("SHA-512", requestIP);
+    const ipHash = [...new Uint8Array(digest)].map(x => {
+        return x.toString(16).padStart(2, "0");
+    }).join("");
+
+    // Check if the current IP address already has voted for this poll
     for(const option of poll.options) {
         // Return 403 (Forbidden) if the user has already voted
-        if(option.votes.includes(requestIP)) {
+        if(option.votes.includes(ipHash)) {
             return new Response(JSON.stringify({
                 error: "You already have voted",
                 code: 403
@@ -79,7 +85,7 @@ export default async function handleVote(request, env, ctx) {
     }
 
     // Add their vote to the poll
-    poll.options[vote].votes.push(requestIP);
+    poll.options[vote].votes.push(ipHash);
 
     // Save the poll
     ctx.waitUntil(env.R2_BUCKET.put(pollID, JSON.stringify(poll), {
@@ -91,7 +97,7 @@ export default async function handleVote(request, env, ctx) {
         }
     }));
 
-    // Hide the voters IP addresses from the poll
+    // Hide the voters IP address hashes from the poll
     poll.options.forEach(option => {
         option.votes = option.votes.length;
     });

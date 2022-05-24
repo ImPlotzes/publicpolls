@@ -10,7 +10,7 @@ const pollID = window.location.pathname.replace("/poll/", "");
     const askerElement = document.getElementById("asker");
     const optionsElement = document.getElementById("options");
 
-    // Get the poll (removes vote information if the IP address hasn't yet voted)
+    // Get the poll (the API won't return vote statistics if the IP address hasn't voted yet)
     const response = await fetch(`/api/poll?id=${pollID}`);
     const poll = await response.json();
 

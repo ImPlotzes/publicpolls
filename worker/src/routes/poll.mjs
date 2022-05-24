@@ -46,12 +46,18 @@ export default async function handlePoll(request, env, ctx) {
     // Get the poll object
     const poll = await r2Object.json();
 
-    // Check if the current IP address already voted
-    const requestIP = request.headers.get("CF-Connecting-IP");
+    // Create the IP address hash
+    const requestIP = new TextEncoder().encode(request.headers.get("CF-Connecting-IP"));
+    const digest = await crypto.subtle.digest("SHA-512", requestIP);
+    const ipHash = [...new Uint8Array(digest)].map(x => {
+        return x.toString(16).padStart(2, "0");
+    }).join("");
+
+    // Check if the current IP address already has voted
     poll.voted = false;
     for(let i = 0; i < poll.options.length; i++) {
         const option  = poll.options[i];
-        if(option.votes.includes(requestIP)) {
+        if(option.votes.includes(ipHash)) {
             poll.voted = true;
             poll.chosen_option = i;
         }
@@ -68,8 +74,7 @@ export default async function handlePoll(request, env, ctx) {
     // Return the poll object
     return new Response(JSON.stringify(poll), {
         headers: {
-            "Content-Type": "application/json",
-            "X-your-ip": requestIP
+            "Content-Type": "application/json"
         }
     });
 }
