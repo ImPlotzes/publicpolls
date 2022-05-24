@@ -134,7 +134,13 @@ function showPollResult(poll) {
         for(let i = 0; i < poll.options.length; i++) {
             const barElement = barElements[i];
             const option = poll.options[i];
-            barElement.style.width = `${Math.round(option.votes / totalVotes * 100)}%`;
+            const percent = Math.round(option.votes / totalVotes * 100);
+            barElement.style.width = `${percent}%`;
+            
+            // Show the votes and percentage of the option
+            const emElement = document.createElement("em");
+            emElement.textContent = `${option.votes} vote${option.votes==1?"":"s"} — ${percent}%`;
+            barElement.nextElementSibling.nextElementSibling.append(emElement);
         }
 
         // Make sure the vote button is disabled

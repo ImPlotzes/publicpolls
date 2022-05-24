@@ -86,6 +86,12 @@ input:checked ~ span::before {
     border-color: var(--main-colour);
 }
 
+input ~ span em {
+    font-size: 0.8em;
+    opacity: 0.5;
+    margin-left: 0.5em;
+}
+
 #vote-container {
     display: flex;
     align-items: center;
