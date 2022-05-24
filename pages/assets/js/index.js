@@ -3,7 +3,12 @@
 
     // Get a list of the polls
     const list = await fetch("/api/list");
-    const json = await list.json();
+    let json = await list.json();
+
+    // Sort the polls by date
+    json.sort((a, b) => {
+       return b.created_at - a.created_at;
+    });
 
     // Get the poll container DOM and make it empty (to remove the loading animation)
     const pollContainer = document.getElementById("polls");
