@@ -11,24 +11,18 @@ export async function onRequestGet(context) {
 
     // Get poll information for the meta tags
     const pollID = url.pathname.replace("/poll/", "");
-    try {
-        const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
-        const res = await fetch(origin + "/assets/html/poll");
-        return new Response(res.body, {
-            headers: {
-                "Content-Type": "text/html",
-                "X-Poll-Error": apiRes.status
-            }
-        });
-        poll = await apiRes.json();
-    } catch (err) {
-        
-    }
+    const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
+    const res = await fetch(origin + "/assets/html/poll");
+    return new Response(res.body, {
+        headers: {
+            "Content-Type": "text/html",
+            "X-Poll-Error": apiRes.status
+        }
+    });
 
-    //const res = await fetch(origin + "/assets/html/poll");
 
     // Rewrite the HTML to dynamically fill in the meta tags
-    //return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
+    return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
 }
 
 
