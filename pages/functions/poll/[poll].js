@@ -13,12 +13,11 @@ export async function onRequestGet(context) {
     const pollID = url.pathname.replace("/poll/", "");
     try {
         const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
-        const body = await apiRes.text();
         const res = await fetch(origin + "/assets/html/poll");
         return new Response(res.body, {
             headers: {
                 "Content-Type": "text/html",
-                "X-Poll-Error": body
+                "X-Poll-Error": apiRes.status
             }
         });
         poll = await apiRes.json();
