@@ -16,32 +16,15 @@ export default async function handleList(request, env, ctx) {
         });
     }
 
-    // Get the amount of polls to return
-    const url = new URL(request.url);
-    const amount = parseInt(url.searchParams.get("limit") ?? 25);
-
-    // Check if the amount is valid
-    if(isNaN(amount) || amount <= 0 || amount > 25) {
-        return new Response(JSON.stringify({
-            error: "Invalid limit",
-            code: 400
-        }), {
-            status: 400
-        });
-    }
-
     // Get the polls from the database
-    const r2Objects = (await env.R2_BUCKET.list({
-        limit: amount
-    })).objects;
+    const r2Objects = (await env.R2_BUCKET.list()).objects;
 
-    // Get the poll objects
-    const promises = await Promise.allSettled(r2Objects.map(poll => getPoll(env, poll)));
+    // Create the array of polls
     const polls = [];
-    for(const poll of promises) {
-        if(poll.status == "fulfilled") {
-            polls.push(poll.value);
-        }
+    for(const r2Object of r2Objects) {
+        const poll = r2Object.customMetadata;
+        poll.id = r2Object.key;
+        polls.push(poll);
     }
 
     // Return the polls
@@ -50,22 +33,4 @@ export default async function handleList(request, env, ctx) {
             "Content-Type": "application/json"
         }
     });
-}
-
-
-/**
- * Gets the poll object from an R2Object ready to be sent to the client
- * @param {*} env Object to access the R2 bucket
- * @param {*} poll The poll object
- * @returns {Promise<Object>} The poll object
- */
-async function getPoll(env, poll) {
-    const json = await (await env.R2_BUCKET.get(poll.key)).json();
-    json.total_votes = 0;
-    while(json.options.length != 0) {
-        const option = json.options.pop();
-        json.total_votes += option.votes.length;
-    }
-    json.options = undefined;
-    return json;
 }

@@ -66,11 +66,18 @@ export default async function handleCreate(request, env, ctx) {
     }
     
     // Add the poll to the database
-    await env.R2_BUCKET.put(poll.id, JSON.stringify(poll));
+    await env.R2_BUCKET.put(poll.id, JSON.stringify(poll), {
+        customMetadata: {
+            created_at: poll.created_at,
+            name: poll.name,
+            question: poll.question,
+            total_votes: 0
+        }
+    });
 
     // Convert the vote arrays into numbers
     for(const option of poll.options) {
-        option.votes = option.votes.length;
+        option.votes = undefined;
     }
 
     // Return the poll

@@ -82,9 +82,16 @@ export default async function handleVote(request, env, ctx) {
     poll.options[vote].votes.push(requestIP);
 
     // Save the poll
-    ctx.waitUntil(env.R2_BUCKET.put(pollID, JSON.stringify(poll)));
+    ctx.waitUntil(env.R2_BUCKET.put(pollID, JSON.stringify(poll), {
+        customMetadata: {
+            created_at: poll.created_at,
+            name: poll.name,
+            question: poll.question,
+            total_votes: poll.options.reduce((total, option) => total + option.votes.length, 0)
+        }
+    }));
 
-    // Hide the IP address from the poll
+    // Hide the voters IP addresses from the poll
     poll.options.forEach(option => {
         option.votes = option.votes.length;
     });
