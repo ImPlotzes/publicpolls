@@ -10,19 +10,28 @@ export async function onRequestGet(context) {
     const origin = url.origin;
 
     // Get poll information for the meta tags
-    const pollID = url.pathname.replace("/poll/", "");
-    const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
+    //const pollID = url.pathname.replace("/poll/", "");
+    //const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
+
+    /**
+     * ================================================================
+     * TRIED TO DYNAMICALLY CREATE THE META TAGS BY GETTING THE QUESTION
+     * AND THE OPTIONS FROM THE API, BUT IT DOESN'T WORK. THAT'S WHY
+     * ALL THE HTML-REWRITER STUFF IS STILL HERE.
+     * ================================================================
+     */
+
+
     const res = await fetch(origin + "/assets/html/poll");
     return new Response(res.body, {
         headers: {
-            "Content-Type": "text/html",
-            "X-Poll-Error": apiRes.status
+            "Content-Type": "text/html"
         }
     });
 
 
     // Rewrite the HTML to dynamically fill in the meta tags
-    return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
+    //return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
 }
 
 
