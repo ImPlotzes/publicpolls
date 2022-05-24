@@ -57,6 +57,7 @@
     border: 2px solid var(--background-tertiary);
     color: var(--main-colour);
     cursor: pointer;
+    font-size: 1.1em;
     transition: border-color 0.2s ease-out;
 }
 

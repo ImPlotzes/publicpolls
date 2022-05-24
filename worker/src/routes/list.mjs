@@ -2,9 +2,10 @@
  * Handle requests to the /api/list endpoint
  * @param {Request} request The incoming HTTP request
  * @param {*} env Object to access the environment variables and bindings
+ * @param {*} ctx Object to access the context functions
  * @returns {Promise<Response>} The response to send back to the client
  */
-export default async function handleList(request, env) {
+export default async function handleList(request, env, ctx) {
     // Check if the request method is allowed
     if(request.method != "GET") {
         return new Response(JSON.stringify({
@@ -38,7 +39,6 @@ export default async function handleList(request, env) {
     const promises = await Promise.allSettled(r2Objects.map(poll => getPoll(env, poll)));
     const polls = [];
     for(const poll of promises) {
-        console.log(poll);
         if(poll.status == "fulfilled") {
             polls.push(poll.value);
         }
@@ -62,9 +62,10 @@ export default async function handleList(request, env) {
 async function getPoll(env, poll) {
     const json = await (await env.R2_BUCKET.get(poll.key)).json();
     json.total_votes = 0;
-    for(const option of json.options) {
+    while(json.options.length != 0) {
+        const option = json.options.pop();
         json.total_votes += option.votes.length;
-        option.votes = -1;
     }
+    json.options = undefined;
     return json;
 }

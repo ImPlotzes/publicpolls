@@ -2,9 +2,10 @@
  * Handles requests to the /api/create endpoint
  * @param {Request} request The incoming HTTP request
  * @param {*} env Object to access the environment variables and bindings
+ * @param {*} ctx Object to access the context functions
  * @returns {Promise<Response>} The response to send back to the client
  */
-export default async function handleCreate(request, env) {
+export default async function handleCreate(request, env, ctx) {
     if(request.method != "POST") {
         return new Response(JSON.stringify({
             error: "Method not allowed",

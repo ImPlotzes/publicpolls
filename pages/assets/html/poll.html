@@ -22,36 +22,23 @@
             Home
         </a>
 
-        <h1 id="question">XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</h1>
-        <div id="options">
-            <label for="option-1">
-                <input type="radio" name="option" id="option-1" value="Red">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
-            <label for="option-2">
-                <input type="radio" name="option" id="option-2" value="Blue">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
-            <label for="option-3">
-                <input type="radio" name="option" id="option-3" value="Green">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
-            <label for="option-4">
-                <input type="radio" name="option" id="option-4" value="Yellow">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
-            <label for="option-5">
-                <input type="radio" name="option" id="option-5" value="Orange">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
-            <label for="option-6">
-                <input type="radio" name="option" id="option-6" value="Purple">
-                <span>XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXXX</span>
-            </label>
+        <div id="loading">
+            <svg width="200px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="26" fill="none" stroke="var(--background-secondary)" stroke-dasharray="40 40" stroke-linecap="round" stroke-width="5">
+                    <animateTransform attributeName="transform" dur="1s" keyTimes="0;1" repeatCount="indefinite" type="rotate" values="0 50 50;360 50 50" />
+                </circle>
+            </svg>
         </div>
-        <div id="vote-container">
-            <button id="vote-button">Vote!</button>
-            <p id="error-message"></p>
+
+        <div id="content-container">
+            <h1 id="question"></h1>
+            <p id="asker">&mdash; </p>
+            <div id="options"></div>
+            <div id="vote-container">
+                <button id="vote-button">Vote!</button>
+                <p id="error-message"></p>
+            </div>
         </div>
+        <script src="/assets/js/poll.js"></script>
     </body>
 </html>

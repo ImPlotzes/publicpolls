@@ -1,12 +1,16 @@
 // Import the route handlers
 import create from "./routes/create.mjs";
 import list from "./routes/list.mjs";
+import poll from "./routes/poll.mjs";
+import vote from "./routes/vote.mjs";
 
 
 // Define all the routes and their handler
 const routes = {
     "create": create,
-    "list": list
+    "list": list,
+    "poll": poll,
+    "vote": vote
 };
 
 
@@ -15,9 +19,10 @@ export default {
      * Handles all HTTP requests
      * @param {Request} request The incoming HTTP request
      * @param {*} env Object to access the environment variables and bindings
+     * @param {*} ctx Object to access the context functions
      * @returns {Response} The response to send back to the client
      */
-    async fetch(request, env) {
+    async fetch(request, env, ctx) {
         const url = new URL(request.url);
         const path = url.pathname.replace("/api/", "");
 
@@ -42,6 +47,7 @@ export default {
         }
 
         // Return the generated response from the route handler
-        return routes[path](request, env);
+        const response = await routes[path](request, env, ctx);
+        return response;
     }
 }
