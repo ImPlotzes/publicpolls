@@ -13,11 +13,12 @@ export async function onRequestGet(context) {
     const pollID = url.pathname.replace("/poll/", "");
     try {
         const apiRes = await fetch(origin + "/api/poll?id=" + pollID);
+        const body = await apiRes.text();
         const res = await fetch(origin + "/assets/html/poll");
         return new Response(res.body, {
             headers: {
                 "Content-Type": "text/html",
-                "X-Poll-Error": await apiRes.text()
+                "X-Poll-Error": body
             }
         });
         poll = await apiRes.json();
@@ -25,10 +26,10 @@ export async function onRequestGet(context) {
         
     }
 
-    const res = await fetch(origin + "/assets/html/poll");
+    //const res = await fetch(origin + "/assets/html/poll");
 
     // Rewrite the HTML to dynamically fill in the meta tags
-    return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
+    //return new HTMLRewriter().on("meta", new ElementHandler()).transform(res);
 }
 
 
