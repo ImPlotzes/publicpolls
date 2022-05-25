@@ -15,7 +15,7 @@ const pollID = window.location.pathname.replace("/poll/", "");
 
     // If it wasn't found, get it from the API
     if(poll == "") {
-        const response = await fetch(`http://localhost:8787/api/poll?id=${pollID}`);
+        const response = await fetch(`/api/poll?id=${pollID}`);
         poll = await response.json();
 
         // Show the error message if the fetch wasn't successfull
@@ -95,7 +95,7 @@ voteButton.addEventListener("click", async () => {
     }
 
     // Vote on the poll
-    const response = await fetch(`http://localhost:8787/api/vote?id=${pollID}&vote=${chosenOption}`);
+    const response = await fetch(`/api/vote?id=${pollID}&vote=${chosenOption}`);
     const poll = await response.json();
 
     // Show the error message if the fetch wasn't successfull
