@@ -10,15 +10,25 @@ const pollID = window.location.pathname.replace("/poll/", "");
     const askerElement = document.getElementById("asker");
     const optionsElement = document.getElementById("options");
 
-    // Get the poll (the API won't return vote statistics if the IP address hasn't voted yet)
-    const response = await fetch(`/api/poll?id=${pollID}`);
-    const poll = await response.json();
+    // Get the poll from the meta tag
+    let poll = document.querySelector("meta[name='publicpolls:poll']").content;
 
-    // Show the error message if the fetch wasn't successfull
-    if(response.status != 200) {
-        loadingContainer.textContent = poll.error;
-        return;
+    // If it wasn't found, get it from the API
+    if(poll == "") {
+        const response = await fetch(`http://localhost:8787/api/poll?id=${pollID}`);
+        poll = await response.json();
+
+        // Show the error message if the fetch wasn't successfull
+        if(response.status != 200) {
+            loadingContainer.textContent = poll.error;
+            return;
+        }
+
+    // Parse the poll object from the meta tag
+    } else {
+        poll = JSON.parse(poll);
     }
+    
 
     // Show the question and asker in the DOM
     questionElement.textContent = poll.question;
@@ -85,7 +95,7 @@ voteButton.addEventListener("click", async () => {
     }
 
     // Vote on the poll
-    const response = await fetch(`/api/vote?id=${pollID}&vote=${chosenOption}`);
+    const response = await fetch(`http://localhost:8787/api/vote?id=${pollID}&vote=${chosenOption}`);
     const poll = await response.json();
 
     // Show the error message if the fetch wasn't successfull
