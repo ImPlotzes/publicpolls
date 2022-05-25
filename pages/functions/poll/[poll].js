@@ -1,6 +1,6 @@
 let POLL = null;
-const WORKER_DEV_DOMAIN = "http://localhost:8787";
-//const WORKER_DEV_DOMAIN = "https://publicpolls.plotzes.workers.dev";
+//const WORKER_DEV_DOMAIN = "http://localhost:8787";
+const WORKER_DEV_DOMAIN = "https://publicpolls.plotzes.workers.dev";
 
 /**
  * Responds with the same HTML to requests to all /poll/xxxxx routes
