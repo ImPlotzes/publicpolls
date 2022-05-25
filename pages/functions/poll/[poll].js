@@ -15,7 +15,7 @@ export async function onRequestGet(context) {
     const pollID = url.pathname.replace("/poll/", "");
     const apiRes = await fetch(WORKER_DEV_DOMAIN + "/api/poll?id=" + pollID, {
         headers: {
-            "CF-Connecting-IP": context.request.headers.get("CF-Connecting-IP")
+            "X-User-IP": context.request.headers.get("CF-Connecting-IP")
         }
     });
 

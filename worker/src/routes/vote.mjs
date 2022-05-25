@@ -65,7 +65,11 @@ export default async function handleVote(request, env, ctx) {
     }
 
     // Create the IP address hash
-    const requestIP = new TextEncoder().encode(request.headers.get("CF-Connecting-IP"));
+    let requestIP = request.headers.get("CF-Connecting-IP");
+    if(requestIP == "2a06:98c0:3600::103") {
+        requestIP = request.headers.get("X-User-IP");
+    }
+    requestIP = new TextEncoder().encode(requestIP);
     const digest = await crypto.subtle.digest("SHA-512", requestIP);
     const ipHash = [...new Uint8Array(digest)].map(x => {
         return x.toString(16).padStart(2, "0");
