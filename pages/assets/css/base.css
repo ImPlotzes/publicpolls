@@ -80,6 +80,14 @@ hr {
     margin: 1em 0;
 }
 
+code {
+    background-color: var(--background-secondary);
+    font-size: 85%;
+    padding: 0.2em;
+    border-radius: 3px;
+    user-select: text;
+}
+
 @media screen and (max-width: 1000px) {
     body {
         width: 100vw;

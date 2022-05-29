@@ -1,79 +1,16 @@
 // Get the poll ID from the URL
 const pollID = window.location.pathname.replace("/poll/", "");
 
-// Immediately invoked async function to allow the use of await
-(async () => {
-    // Get needed DOM elements
-    const loadingContainer = document.getElementById("loading");
-    const contentContainer = document.getElementById("content-container");
-    const questionElement = document.getElementById("question");
-    const askerElement = document.getElementById("asker");
-    const optionsElement = document.getElementById("options");
-
-    // Get the poll from the meta tag
-    let poll = document.querySelector("meta[name='publicpolls:poll']").content;
-
-    // If it wasn't found, get it from the API
-    if(poll == "") {
-        const response = await fetch(`/api/poll?id=${pollID}`);
-        poll = await response.json();
-
-        // Show the error message if the fetch wasn't successfull
-        if(response.status != 200) {
-            loadingContainer.textContent = poll.error;
-            return;
+// Animate the poll bars if there are results
+window.onload = () => {
+    const barElements = document.getElementsByClassName("bar");
+    for(const bar of barElements) {
+        const width = bar.getAttribute("data-width");
+        if(width) {
+            bar.style.width = width + "%";
         }
-
-    // Parse the poll object from the meta tag
-    } else {
-        poll = JSON.parse(poll);
     }
-    
-
-    // Show the question and asker in the DOM
-    questionElement.textContent = poll.question;
-    askerElement.textContent += poll.name;
-
-    // Go through all the options of the poll and add them to the DOM
-    for(let i = 0; i < poll.options.length; i++) {
-        const option = poll.options[i];
-
-        // Label of the input, is the container for the option in the DOM
-        const labelElement = document.createElement("label");
-        labelElement.setAttribute("for", `option-${i}`);
-
-        // Element that shows the result bar (no results makes this invisible)
-        const barElement = document.createElement("div");
-        barElement.classList.add("bar");
-        labelElement.appendChild(barElement);
-
-        // The radio button for vote functionality 
-        const inputElement = document.createElement("input");
-        inputElement.setAttribute("type", "radio");
-        inputElement.setAttribute("name", "option");
-        inputElement.setAttribute("id", `option-${i}`);
-        inputElement.setAttribute("value", i);
-        labelElement.appendChild(inputElement);
-
-        // The text of the option
-        const spanElement = document.createElement("span");
-        spanElement.textContent = option.value;
-        labelElement.appendChild(spanElement);
-
-        // Add the label (option) to the DOM
-        optionsElement.appendChild(labelElement);
-    }
-
-    // Hide the loading container and show the content container
-    loadingContainer.style.display = "none";
-    contentContainer.style.display = "block";
-
-    // Timeout to make sure the bar animations will play when the results will be shown
-    setTimeout(() => {
-        showPollResult(poll);
-    }, 10);
-})();
-
+};
 
 // Click event listener for the vote button
 const voteButton = document.getElementById("vote-button");

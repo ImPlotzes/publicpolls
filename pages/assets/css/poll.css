@@ -7,17 +7,12 @@
     margin-right: 0.5em;
 }
 
-#loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#error {
+    text-align: center;
     width: 100%;
     font-size: 3em;
     margin-top: 3em;
-}
-
-#content-container {
-    display: none;
+    user-select: text;
 }
 
 #question {

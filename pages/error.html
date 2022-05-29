@@ -4,55 +4,37 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>PublicPolls</title>
+        <title>Internal Error | Public Polls</title>
         <link rel="icon" href="/assets/img/icon.svg">
         <meta name="theme-color" content="#3ab35e">
 
-        <meta name="description" content="Vote on this poll!">
+        <meta name="description" content="Error! Something went really wrong!">
 
         <meta property="og:url" content="https://publicpolls.cf/">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="PublicPolls">
         <meta property="og:title" content="PublicPolls">
-        <meta property="og:description" content="Vote on this poll!">
+        <meta property="og:description" content="Error! Something went really wrong!">
         <meta property="og:image" content="/assets/img/banner.png">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="PublicPolls">
         <meta property="twitter:url" content="https://publicpolls.cf/">
         <meta name="twitter:title" content="PublicPolls">
-        <meta name="twitter:description" content="Vote on this poll!">
+        <meta name="twitter:description" content="Error! Something went really wrong!">
         <meta name="twitter:image" content="/assets/img/banner.png">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap">
         <link rel="stylesheet" href="/assets/css/base.css">
-        <link rel="stylesheet" href="/assets/css/poll.css">
+        <link rel="stylesheet" href="/assets/css/404.css">
     </head>
 
     <body>
-        <a id="back-button" href="/">
-            <svg height="1em" viewBox="0 0 63 52" xmlns="http://www.w3.org/2000/svg">
-                <path fill="var(--text-colour)" d="m13 21h45a1 1 0 010 10h-45l15 15a1 1 0 01-5 5l-20-20c-4-4-4-6 0-10l20-20a1 1 0 015 5z"/>
-            </svg>
-            Home
-        </a>
-
-        <div id="error">
-            <p>Something went wrong getting this poll.</p>
-            <p>Error: <code>-1</code></p>
+        <div id="code-info">
+            <h1>500</h1>
+            <p>Internal Error</p>
         </div>
-
-        <div id="content-container">
-            <h1 id="question"></h1>
-            <p id="asker"></p>
-            <div id="options"></div>
-            <div id="vote-container">
-                <button id="vote-button">Vote!</button>
-                <p id="error-message"></p>
-            </div>
-        </div>
-        <script src="/assets/js/poll.js"></script>
+        <p>Click <a href="/">here</a> to return to the homepage.</p>
     </body>
 </html>
