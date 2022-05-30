@@ -15,8 +15,9 @@ window.onload = () => {
 // Click event listener for the vote button
 const voteButton = document.getElementById("vote-button");
 voteButton.addEventListener("click", async () => {
-    // Disable the button so they can't click it while it's doing stuff
+    // Disable the buttons so they can't click it while it's doing stuff
     voteButton.disabled = true;
+    document.getElementById("modal-button").disabled = true;
     
     const errorElement = document.getElementById("error-message");
 
@@ -28,6 +29,7 @@ voteButton.addEventListener("click", async () => {
         errorElement.style.border = "1px solid #a32f2f";
         errorElement.textContent = "Please choose an option";
         voteButton.disabled = false;
+        document.getElementById("modal-button").disabled = false;
         return;
     }
 
@@ -40,6 +42,7 @@ voteButton.addEventListener("click", async () => {
         errorElement.style.border = "1px solid #a32f2f";
         errorElement.textContent = poll.error;
         voteButton.disabled = false;
+        document.getElementById("modal-button").disabled = false;
         return;
     }
 
@@ -77,6 +80,7 @@ document.getElementById("results-button").addEventListener("click", async () => 
         errorElement.style.border = "1px solid #a32f2f";
         errorElement.textContent = poll.error;
         voteButton.disabled = false;
+        document.getElementById("modal-button").disabled = false;
         return;
     }
 
@@ -130,7 +134,8 @@ function showPollResult(poll) {
             barElement.nextElementSibling.nextElementSibling.append(emElement);
         }
 
-        // Make sure the vote button is disabled
+        // Make sure the buttons are disabled
         document.getElementById("vote-button").disabled = true;
+        document.getElementById("modal-button").disabled = true;
     }
 }
