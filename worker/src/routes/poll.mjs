@@ -82,6 +82,7 @@ export default async function handlePoll(request, env, ctx) {
             option.votes = undefined;
         });
     }
+    poll.no_votes = undefined;
 
     // Return the poll object
     return new Response(JSON.stringify(poll), {
