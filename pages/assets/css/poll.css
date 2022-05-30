@@ -15,6 +15,45 @@
     user-select: text;
 }
 
+#modal-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+#modal {
+    width: fit-content;
+    background-color: var(--background-primary);
+    border-radius: 5px;
+    padding: 10px 30px;
+    margin: 25px
+}
+
+#modal button {
+    color: var(--text-colour);
+    background-color: transparent;
+    border: 2px solid var(--main-colour);
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 1em;
+    margin: 10px 2em 20px 0;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease-out;
+}
+
+#modal button:hover {
+    border-color: var(--emphasis-colour);
+}
+
 #question {
     margin: 1.5em 0 0;
     font-size: 2.5em;
@@ -112,6 +151,29 @@ input ~ span em {
 }
 
 #vote-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#modal-button {
+    color: var(--text-colour);
+    background-color: transparent;
+    border: 2px solid var(--main-colour);
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 1.1em;
+    margin-right: 2em;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease-out;
+}
+
+#modal-button:hover {
+    border-color: var(--emphasis-colour);
+}
+
+#modal-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }

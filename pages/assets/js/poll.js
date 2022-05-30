@@ -52,6 +52,43 @@ voteButton.addEventListener("click", async () => {
 });
 
 
+// Shows the are-you-sure modal when the user clicks the show results button
+document.getElementById("modal-button").addEventListener("click", () => {
+    document.getElementById("modal-container").style.display = "flex";
+});
+
+
+document.getElementById("results-button").addEventListener("click", async () => {
+    // Disable the vote and modal button at the bottom of the poll
+    document.getElementById("vote-button").disabled = true;
+    document.getElementById("modal-button").disabled = true;
+
+    // Hide the modal
+    document.getElementById("modal-container").style.display = "none";
+
+    // Vote on option -1 to get the results and remove their voting rights
+    const response = await fetch(`/api/vote?id=${pollID}&vote=-1`);
+    const poll = await response.json();
+
+    const errorElement = document.getElementById("error-message");
+
+    // Show the error message if the fetch wasn't successfull
+    if(response.status != 200) {
+        errorElement.style.border = "1px solid #a32f2f";
+        errorElement.textContent = poll.error;
+        voteButton.disabled = false;
+        return;
+    }
+
+    // Say that the results are now shown next to the button
+    errorElement.style.border = "1px solid var(--main-colour)";
+    errorElement.textContent = "Here are the results!";
+
+    // Show the results of the poll
+    showPollResult(poll);
+});
+
+
 /**
  * Shows the results of the poll in the DOM (only if the person has voted)
  * @param {*} poll A poll object
@@ -63,7 +100,9 @@ function showPollResult(poll) {
         const chosenOption = poll.chosen_option;
 
         // Check the chosen option
-        document.getElementById("option-" + chosenOption).checked = true;
+        if(chosenOption != -1) {
+            document.getElementById("option-" + chosenOption).checked = true;
+        }
 
         // Disable all inputs on the page (so they can't change the checked option)
         for(const input of document.getElementsByTagName("input")) {
@@ -75,6 +114,7 @@ function showPollResult(poll) {
         for(const option of poll.options) {
             totalVotes += option.votes;
         }
+        totalVotes = totalVotes == 0 ? 1 : totalVotes;
 
         // Go through all the options and set the correct width of the bar
         const barElements = document.getElementsByClassName("bar");

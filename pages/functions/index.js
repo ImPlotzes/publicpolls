@@ -6,7 +6,7 @@
 export async function onRequestGet(context) {
     const promises = [];
 
-    // Get poll information for the meta tags
+    // Get the poll list from the API
     promises.push((async () => {
         const apiRes = await fetch(context.env.API_DOMAIN + "/api/list");
         
@@ -25,7 +25,7 @@ export async function onRequestGet(context) {
     // Wait for all the promises to resolve
     const [listPromise, html] = await Promise.allSettled(promises);
 
-    // If the HTML fetch failed then redirect them to the error page
+    // If the HTML fetch somehow failed then redirect them to the error page
     if(html.status != "fulfilled") {
         return Response.redirect(origin + "/error", 307);
     }

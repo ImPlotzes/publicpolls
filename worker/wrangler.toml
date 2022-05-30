@@ -8,4 +8,4 @@ main = "src/index.mjs"
 [[r2_buckets]]
 binding = "R2_BUCKET"
 bucket_name = "publicpolls-prod"
-preview_bucket_name = "publicpolls-dev"
+preview_bucket_name = "publicpolls-prod"

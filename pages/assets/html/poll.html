@@ -45,11 +45,22 @@
         </div>
 
         <div id="content-container">
+            <div id="modal-container">
+                <div id="modal">
+                    <h2>Note</h2>
+                    <p>You can't vote anymore after looking at the results.
+                        Are you sure you want to see the results?
+                    </p>
+                    <button id="results-button">Yes, show results</button>
+                    <button onclick="document.getElementById('modal-container').style.display = 'none'">No</button>
+                </div>
+            </div>
             <h1 id="question"></h1>
             <p id="asker"></p>
             <div id="options"></div>
             <div id="vote-container">
                 <button id="vote-button">Vote!</button>
+                <button id="modal-button">Show Results</button>
                 <p id="error-message"></p>
             </div>
         </div>

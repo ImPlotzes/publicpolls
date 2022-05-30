@@ -136,7 +136,8 @@ export async function onRequestGet({ request, env}) {
             // Determine if the user has voted
             // If so, then show the results
             if(poll.voted) {
-                const totalVotes = poll.options.reduce((acc, cur) => acc + cur.votes, 0);
+                let totalVotes = poll.options.reduce((acc, cur) => acc + cur.votes, 0);
+                totalVotes = totalVotes == 0 ? 1 : totalVotes;
                 for(let i = 0; i < poll.options.length; i++) {
                     const option = poll.options[i];
                     const percent = Math.round(option.votes / totalVotes * 100);
@@ -162,6 +163,13 @@ export async function onRequestGet({ request, env}) {
         }
     })
     .on("#vote-button", {   // Disable the vote button if the user has voted
+        element(element) {
+            if(poll.voted) {
+                element.setAttribute("disabled", "true");
+            }
+        }
+    })
+    .on("#modal-button", {  // Disable the show-results button if the user has voted
         element(element) {
             if(poll.voted) {
                 element.setAttribute("disabled", "true");

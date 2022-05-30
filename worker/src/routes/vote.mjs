@@ -29,7 +29,7 @@ export default async function handleVote(request, env, ctx) {
         }), {
             status: 400
         });
-    } else if(isNaN(vote) || vote < 0) {
+    } else if(isNaN(vote) || vote < -1) {
         return new Response(JSON.stringify({
             error: "Invalid vote",
             code: 400
@@ -64,11 +64,15 @@ export default async function handleVote(request, env, ctx) {
         });
     }
 
-    // Create the IP address hash
+    // Get the user's IP address
+    const requestWorker = request.headers.get("CF-Worker");
     let requestIP = request.headers.get("CF-Connecting-IP");
-    if(requestIP == "2a06:98c0:3600::103") {
+    // Get it from the custom header only if the request came from Pages Functions
+    if(requestWorker == "publicpolls.pages.dev" && requestIP == "2a06:98c0:3600::103") {
         requestIP = request.headers.get("X-User-IP");
     }
+
+    // Create a SHA-512 hash of the IP address
     requestIP = new TextEncoder().encode(requestIP);
     const digest = await crypto.subtle.digest("SHA-512", requestIP);
     const ipHash = [...new Uint8Array(digest)].map(x => {
@@ -88,6 +92,44 @@ export default async function handleVote(request, env, ctx) {
         }
     }
 
+    // Check if the user wants to see the results without voting
+    if(vote == -1) {
+        if(!poll.no_votes) {
+            poll.no_votes = [];
+        }
+
+        // Add their IP address to the list of users who have seen results
+        if(!poll.no_votes.includes(ipHash)) {
+            poll.no_votes.push(ipHash);
+        }
+
+        // Save the poll
+        ctx.waitUntil(env.R2_BUCKET.put(pollID, JSON.stringify(poll), {
+            customMetadata: {
+                created_at: poll.created_at,
+                name: poll.name,
+                question: poll.question,
+                total_votes: poll.options.reduce((total, option) => total + option.votes.length, 0)
+            }
+        }));
+
+        // Hide the voters IP address hashes from the poll
+        poll.options.forEach(option => {
+            option.votes = option.votes.length;
+        });
+        poll.no_votes = undefined;
+
+        poll.voted = true; // Technically not true
+        poll.chosen_option = -1;
+
+        // Return the poll
+        return new Response(JSON.stringify(poll), {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
+
     // Add their vote to the poll
     poll.options[vote].votes.push(ipHash);
 
@@ -102,6 +144,7 @@ export default async function handleVote(request, env, ctx) {
     }));
 
     // Hide the voters IP address hashes from the poll
+    poll.no_votes = undefined;
     poll.options.forEach(option => {
         option.votes = option.votes.length;
     });

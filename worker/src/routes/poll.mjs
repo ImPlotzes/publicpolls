@@ -46,11 +46,15 @@ export default async function handlePoll(request, env, ctx) {
     // Get the poll object
     const poll = await r2Object.json();
 
-    // Create the IP address hash
+    // Get the user's IP address
+    const requestWorker = request.headers.get("CF-Worker");
     let requestIP = request.headers.get("CF-Connecting-IP");
-    if(requestIP == "2a06:98c0:3600::103") {
+    // Get it from the custom header only if the request came from Pages Functions
+    if(requestWorker == "publicpolls.pages.dev" && requestIP == "2a06:98c0:3600::103") {
         requestIP = request.headers.get("X-User-IP");
     }
+
+    // Create a SHA-512 from the IP address
     requestIP = new TextEncoder().encode(requestIP);
     const digest = await crypto.subtle.digest("SHA-512", requestIP);
     const ipHash = [...new Uint8Array(digest)].map(x => {
@@ -59,13 +63,17 @@ export default async function handlePoll(request, env, ctx) {
 
     // Check if the current IP address already has voted
     poll.voted = false;
+    if(poll.no_votes && poll.no_votes.includes(ipHash)) {
+        poll.voted = true; 
+        poll.chosen_option = -1;
+    }
     for(let i = 0; i < poll.options.length; i++) {
         const option  = poll.options[i];
         if(option.votes.includes(ipHash)) {
             poll.voted = true;
             poll.chosen_option = i;
         }
-        option.votes = option.votes.length;
+        option.votes = option.votes.length; // Convert the votes to a number
     }
 
     // Remove the votes from the poll if the user has not voted
