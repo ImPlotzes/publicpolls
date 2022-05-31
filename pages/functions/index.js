@@ -75,7 +75,7 @@ export async function onRequestGet(context) {
                 // Show absolute date if the poll was posted more than a week ago
                 } else {
                     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    const dateObj = new Date(poll.created_at);
+                    const dateObj = new Date(parseInt(poll.created_at));
                     date += `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
                 }
                 listHTML += `<div class="poll-card" onclick="window.location.href='/poll/${poll.id}'">
