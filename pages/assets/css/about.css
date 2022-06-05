@@ -1,0 +1,7 @@
+h1, h2 {
+    margin-top: 2em;
+}
+
+h2, p {
+    user-select: text;
+}

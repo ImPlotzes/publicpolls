@@ -27,7 +27,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap">
         <link rel="stylesheet" href="/assets/css/base.css">
-        <link rel="stylesheet" href="/assets/css/index.css">
+        <link rel="stylesheet" href="/assets/css/about.css">
     </head>
 
     <body>
@@ -37,7 +37,67 @@
             </svg>
             Home
         </a>
-        
-        <h1>More soon™</h1>
+        <h1>About PublicPolls</h1>
+
+        <h2>What is PublicPolls?</h2>
+        <p>
+            PublicPolls is a site where anyone can create a poll. This poll will
+            be immediately available to anyone. The most recently created polls
+            are shown on the home page. You don't need an account to create a
+            poll or vote on one. You do however need to fill in a when you
+            create a poll. This name doesn't have to be your real name. This
+            is just to help other people find your poll.
+        </p>
+
+        <h2>Why was this made?</h2>
+        <p>
+            This site was made for the
+            <a target="_blank" href="https://blog.cloudflare.com/announcing-our-spring-developer-challenge/">Cloudflare Spring Developer Challenge 2022</a>.
+            The goal of the challenge was to make something with the theme 
+            "real-time" and "collaborative". You also had to use at least two of
+            Cloudflare's developer products. The products that would count were
+            Workers, Cloudflare Pages, Durable Objects or Workers KV.
+        </p>
+        <p>
+            For PublicPolls I used Cloudflare Pages to host the front-end. With
+            the help of Pages Functions I rewrite the HTML for the home page and
+            poll pages. R2, Cloudflare's new beta product, is used to store poll
+            the poll data. I used Workers to access R2 and make an API. Pages
+            Functions uses this API to get the poll data and then rewrite the HTML.
+        </p>
+        <p>
+            The idea for PublicPolls didn't come instantly. I asked people for
+            ideas and quite a lot were pretty fun, but since I use Cloudflare's
+            free plan, I don't have access to Durable Objects. Most ideas
+            would rely on Durable Objects. Eventually the idea came after someone
+            said "Or a site where users can put up polls with voting options and
+            vote on the polls of others". I really liked this so I didn't change
+            anything about the idea and started creating it.
+        </p>
+
+        <h2>How are votes counted?</h2>
+        <p>
+            Whenever you vote on a poll the hash of your IP address is stored
+            as the vote. A hash is a unique string of text derived from your
+            IP address. This hash cannot be reversed to get your IP address.
+            This hash is all that's stored as your vote. The hash of any votes
+            are never given to any other user. Each user can only see how 
+            many votes a certain option has.
+        </p>
+        <p>
+            Since the only identifier of a user is their IP address, it might
+            be possible for a user to vote multiple times on the same poll.
+            This is why you should not rely on this service as a 100% accurate
+            polling service. This is mostly for fun and as a quick utility.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+            The creator (me 😄) of this site is Plotzes. If you want to comment
+            or ask questions about PublicPolls, then you can contact me on
+            Discord. My username is <strong>Plotzes#8332</strong>. I would also
+            highly appreciate it if you would join
+            <a target="_blank" href="https://plotzes.ml/discord">my Discord server</a>.
+        </p>
     </body>
 </html>

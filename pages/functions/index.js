@@ -76,7 +76,7 @@ export async function onRequestGet(context) {
                 } else {
                     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                     const dateObj = new Date(parseInt(poll.created_at));
-                    date += `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+                    date += `on ${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
                 }
                 listHTML += `<div class="poll-card" onclick="window.location.href='/poll/${poll.id}'">
                 <h3>${await escapedHTML(poll.question)}</h3>
