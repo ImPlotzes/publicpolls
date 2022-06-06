@@ -93,7 +93,7 @@ export async function onRequestGet({ request, env}) {
     } else {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const dateObj = new Date(poll.created_at);
-        date += `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+        date += `on ${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
     }
     const description = "Asked by " + poll.name + " | " + date;
 
