@@ -89,6 +89,18 @@ code {
     user-select: text;
 }
 
+#eol-warning {
+    border-radius: 5px;
+    height: 50px;
+    background-color: var(--background-tertiary);
+    color: #e22c2c;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
 @media screen and (max-width: 1000px) {
     body {
         width: 100vw;
